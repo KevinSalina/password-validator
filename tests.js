@@ -21,19 +21,19 @@ describe('validatePassword', () => {
     expect(valid).to.equal(false)
   })
 
-  xit('returns false when the password is missing an upper case letter', () => {
+  it('returns false when the password is missing an upper case letter', () => {
     const valid = validatePassword('p455w0rd!')
 
     expect(valid).to.equal(false)
   })
 
-  xit('returns false when the password is missing a numeric value', () => {
+  it('returns false when the password is missing a numeric value', () => {
     const valid = validatePassword('Password!')
 
     expect(valid).to.equal(false)
   })
 
-  xit('returns false when the password is missing a special character', () => {
+  it('returns false when the password is missing a special character', () => {
     const valid = validatePassword('P455w0rd1')
 
     expect(valid).to.equal(false)
