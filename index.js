@@ -1,69 +1,54 @@
 // Main Validate Password Function
 const validatePassword = password => {
-  if (checkMinLength(password) && checkCase(password) && checkNumeric(password) && checkSpecial(password)) return true
+  let isMinLength = checkMinLength(password)
+  let isLowerCase = false
+  let isUpperCase = false
+  let isNumeric = false
+  let isSpecial = false
 
-  return false
+  for (let i = 0; i < password.length; i++) {
+    !isLowerCase ? isLowerCase = checkLowerCase(password[i]) : isLowerCase = true
+    !isUpperCase ? isUpperCase = checkUpperCase(password[i]) : isUpperCase = true
+    !isNumeric ? isNumeric = checkNumeric(password[i]) : isNumeric = true
+    !isSpecial ? isSpecial = checkSpecial(password[i]) : isSpecial = true
+  }
+
+  return (isMinLength && isLowerCase && isUpperCase && isNumeric && isSpecial)
 }
 
-// Helper Functions
-
-// Check Min Lenght is 8
+// Criteria Functions
+// Min Length is 8
 const checkMinLength = password => password.length >= 8
 
-// Check if includes at least one lower case and upper case letter
-const checkCase = password => {
-  let i = 0
-  let chr = null
-  let isOneLowerCase = null
-  let isOneUpperCase = null
-
-  while (i <= password.length) {
-    chr = password.charAt(i)
-    // Check to make sure current character is not a number
-    if (isNaN(chr * 1)) {
-      // If not a number, check whether lower or upper case
-      if (chr === chr.toLowerCase() && chr !== chr.toUpperCase()) {
-        isOneLowerCase = true
-      } else if (chr === chr.toUpperCase() && chr !== chr.toLowerCase()) {
-        isOneUpperCase = true
-      }
-    }
-    i++
-  }
-  if (isOneLowerCase && isOneUpperCase) return true
-
-  return false
+// One character is lower case
+const checkLowerCase = chr => {
+  return (chr === chr.toLowerCase() && chr !== chr.toUpperCase()) ? true : false
 }
 
-// Check if one character is numeric
-const checkNumeric = password => {
+// One character is upper case
+const checkUpperCase = chr => {
+  return (chr === chr.toUpperCase() && chr !== chr.toLowerCase()) ? true : false
+}
+
+// One character is numeric
+const checkNumeric = chr => {
   const numerics = '0123456789'
-  // let isOneNumeric = null
 
-  for (let i = 0; i < password.length; i++) {
-    if (numerics.indexOf(password[i]) >= 0) {
-      return true
-    }
-  }
-
-  return false
+  return (numerics.indexOf(chr) >= 0) ? true : false
 }
 
-// Check if one character is special
-const checkSpecial = password => {
+// One character is special
+const checkSpecial = chr => {
   const iChars = '~`!#$%^&*+=-[]\\\';,/{}|":<>?'
 
-  for (let i = 0; i < password.length; i++) {
-    if (iChars.indexOf(password[i]) >= 0) {
-      return true
-    }
-  }
-
-  return false
+  return (iChars.indexOf(chr) >= 0) ? true : false
 }
 
-
 module.exports = validatePassword
+
+
+
+
 
 
 
