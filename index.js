@@ -22,26 +22,26 @@ const checkMinLength = password => password.length >= 8
 
 // One character is lower case
 const checkLowerCase = chr => {
-  return (chr === chr.toLowerCase() && chr !== chr.toUpperCase()) ? true : false
+  return (chr === chr.toLowerCase() && chr !== chr.toUpperCase())
 }
 
 // One character is upper case
 const checkUpperCase = chr => {
-  return (chr === chr.toUpperCase() && chr !== chr.toLowerCase()) ? true : false
+  return (chr === chr.toUpperCase() && chr !== chr.toLowerCase())
 }
 
 // One character is numeric
 const checkNumeric = chr => {
   const numerics = '0123456789'
 
-  return (numerics.indexOf(chr) >= 0) ? true : false
+  return (numerics.indexOf(chr) >= 0)
 }
 
 // One character is special
 const checkSpecial = chr => {
   const iChars = '~`!#$%^&*+=-[]\\\';,/{}|":<>?'
 
-  return (iChars.indexOf(chr) >= 0) ? true : false
+  return (iChars.indexOf(chr) >= 0)
 }
 
 module.exports = validatePassword
